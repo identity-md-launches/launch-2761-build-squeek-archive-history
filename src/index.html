@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Squeek Archive: the history of every Squeek NFT</title>
+  <meta name="description" content="Look up any Squeek NFT or wallet and read its life story, merge ancestry and art straight from the Squeekchain contracts, plus a live audit of the hamster wheel's reported work.">
+  <meta name="color-scheme" content="light dark">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Squeek Archive">
+  <meta property="og:description" content="The history layer for Squeekchain: every Squeek's life story, its merge ancestry and an arithmetic audit of the wheel.">
+  <meta property="og:image" content="og.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css">
+  <script type="module" src="app.js"></script>
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <header class="site-header">
+    <a class="brand" href="./" aria-label="Squeek Archive, home"><img src="favicon.svg" alt="" width="28" height="28"><span>Squeek Archive</span></a>
+    <nav aria-label="Sections">
+      <a href="#audit-h">Work audit</a>
+      <a href="#feed-h">Chain history</a>
+    </nav>
+  </header>
+
+  <main id="main">
+    <section class="lookup" aria-labelledby="page-title">
+      <h1 id="page-title">Every Squeek has a past</h1>
+      <p class="lede">Look up a Squeek NFT or a wallet to read its history from Squeekchain, with art rendered live from the contract.</p>
+      <form id="search" class="search" role="search" novalidate>
+        <label for="q">Squeek number or wallet address</label>
+        <div class="search-row">
+          <input id="q" name="q" type="search" inputmode="search" autocomplete="off" spellcheck="false" placeholder="8936 or 0x…" aria-describedby="q-hint q-error">
+          <button class="button primary" type="submit">Look up</button>
+        </div>
+        <p id="q-hint" class="hint">1 to <span id="supply" class="num">9,987</span>, or a 0x address. <button type="button" class="link-button" data-example="8936">Try Squeek #8936</button></p>
+        <p id="q-error" class="error" aria-live="polite"></p>
+      </form>
+      <p id="lookup-status" class="note" role="status"></p>
+    </section>
+
+    <div class="columns">
+      <article id="result" class="panel result"></article>
+
+      <section id="audit" class="audit" aria-labelledby="audit-h">
+        <header id="ribbon" class="ribbon" data-verdict="waiting">
+          <h2 id="audit-h">Is the work real?</h2>
+          <p class="ribbon-line"><span id="ribbon-word" class="ribbon-word">Waiting</span></p>
+          <p id="ribbon-meta" class="ribbon-meta"></p>
+        </header>
+        <div class="panel audit-body">
+        <div class="field">
+          <label for="circumference">Rim circumference (mm)</label>
+          <input id="circumference" type="number" inputmode="decimal" min="1" step="any" value="471" aria-describedby="circumference-hint circumference-error">
+          <p id="circumference-hint" class="hint">Default 471 mm, a 150 mm wheel.</p>
+          <p id="circumference-error" class="error" aria-live="polite"></p>
+        </div>
+        <ol id="audit-rows" class="audit-rows"></ol>
+        <h3>Latest reading</h3>
+        <dl id="reading" class="facts"></dl>
+        </div>
+      </section>
+    </div>
+
+    <section id="feed" class="panel feed" aria-labelledby="feed-h">
+      <h2 id="feed-h">Chain history</h2>
+      <p id="feed-status" class="feed-status" role="status"></p>
+      <progress id="feed-progress" max="18" value="0" aria-label="Pages of the feed read"></progress>
+      <div class="field inline">
+        <label for="feed-filter">Event type</label>
+        <select id="feed-filter"><option value="all">All types</option></select>
+      </div>
+      <ol id="feed-list" class="events"></ol>
+      <button id="feed-more" type="button" class="button" hidden>Show more</button>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>Contracts come from GET /v1/economy/state at runtime. Squeek collection <span id="genesis-address" class="addr">loading…</span>. Reads use raw eth_call on Sepolia through ethereum-sepolia-rpc.publicnode.com, then sepolia.drpc.org. No wallet, no backend, no analytics.</p>
+  </footer>
+</body>
+</html>
